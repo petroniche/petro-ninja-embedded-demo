@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+  <script>
+
+    window.onload = function() {
+      function receiveMessage(e) {
+        console.log(e.data.uwis);
+          document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
+          document.getElementById("well_license_no").innerHTML = e.data.uwis[0].license_number
+          document.getElementById("well_licensee").innerHTML = e.data.uwis[0].licensee
+      }
+      window.addEventListener('message', receiveMessage);
+    }
+
+    function searchUWIs(){
+
+      // Get the window displayed in the iframe.
+      var receiver = document.getElementById('petroninja').contentWindow;
+
+      var uwis = [
+        '100151204307W500',
+        '100150704306W500',
+        '100131204307W500',
+        '100130804306W500',
+        '100150804306W500',
+        '100130704306W500',
+        '100011304307W500',
+        '100021604306W500',
+        '102071304307W500',
+        '100071304307W500',
+        '100051804306W500'
+      ]
+
+      var json_post_message = {
+        "action": "mapSearchWellList",
+        "uwis": uwis
+      }
+
+      console.log(json_post_message);
+
+      receiver.postMessage(json_post_message, '*');
+    }
+
+    function searchUwi(){
+
+      // Get the window displayed in the iframe.
+      var receiver = document.getElementById('petroninja').contentWindow;
+
+      var uwis = [
+        '100/15-12-043-07W5/00',
+      ]
+
+      var json_post_message = {
+        "action": "mapSearchWell",
+        "uwis": uwis
+      }
+
+      console.log(json_post_message);
+
+      receiver.postMessage(json_post_message, '*');
+    }
+
+    function removeWellList(){
+      var receiver = document.getElementById('petroninja').contentWindow;
+      var json_post_message = {
+        "action": "mapRemoveWellList"
+      }
+      receiver.postMessage(json_post_message, '*');
+    }
+
+
+    function centerMap(lat, lng){
+      var receiver = document.getElementById('petroninja').contentWindow;
+
+      var json_post_message = {
+        "action": "mapCenter",
+        "latitude": lat,
+        "longitude": lng
+      }
+
+      console.log(json_post_message);
+
+      receiver.postMessage(json_post_message, '*');
+    }
+  </script>
+
+  <body>
+    <div style="border-style: solid; padding:10px;">
+      <h3> This is the parent App</h3>
+      <b> 1) Click a well on the Petro Ninja map </b>
+      <div>Well is:
+        <div id="well">
+          <table>
+            <tr>
+              <td>UWI</td>
+              <td id="well_uwi"></td>
+            <tr/>
+            <tr>
+              <td>License Number</td>
+              <td id="well_license_no"></td>
+            <tr/>
+            <tr>
+              <td>Licensee</td>
+              <td id="well_licensee"></td>
+            <tr/>
+          </table>
+        </div>
+      </div>
+      <br/>
+
+      <b> 2) Search for Well 100/15-12-043-07W5/00 </b>
+      <br/>
+      <button onclick="searchUwi()">Search Well</button>
+
+      <br/>
+
+      <b> 3) Highlight a list of wells </b>
+      <p>[
+        '100151204307W500',
+        '100150704306W500',
+        '100131204307W500',
+        '100130804306W500',
+        '100150804306W500',
+        '100130704306W500',
+        '100011304307W500',
+        '100021604306W500',
+        '102071304307W500',
+        '100071304307W500',
+        '100051804306W500'
+      ]<br/>
+      <button onclick="searchUWIs()">Plot Well List</button>
+      </p>
+
+      <b> 4) Remove Well List </b>
+      <br/>
+      <button onclick="removeWellList()">Remove Well List</button>
+
+
+      <p>
+      <b> 4) Set Map at Lat Lng 52.264812, -114.566834 <b><br/>
+      <button onclick="centerMap(52.264812, -114.566834)">Center Map</button>
+    </p>
+    </div>
+
+    <br/>
+    <iframe id="petroninja" width="100%" height="700px" src="http://localhost:3001/embedded"></iframe>
+  </body>
+
+</html>
