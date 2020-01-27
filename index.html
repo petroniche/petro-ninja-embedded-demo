@@ -6,7 +6,7 @@
     window.onload = function() {
       function receiveMessage(e) {
         console.log(e);
-        if (e.origin === "https://www.petroninja.com/embedded"){
+        if (e.origin === "https://www.petroninja.com"){
           if(e.action === 'mapWellClick'){
             console.log(e.data.uwis);
             document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
