@@ -7,7 +7,7 @@
       function receiveMessage(e) {
         console.log(e);
         if (e.origin === "https://www.petroninja.com"){
-          if(e.action === 'mapWellClick'){
+          if(e.data.action === 'mapWellClick'){
             console.log(e.data.uwis);
             document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
             document.getElementById("well_license_no").innerHTML = e.data.uwis[0].license_number
