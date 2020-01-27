@@ -5,6 +5,7 @@
 
     window.onload = function() {
       function receiveMessage(e) {
+        console.log(e);
         if (e.origin === "https://www.petroninja.com/embedded"){
           if(e.action === 'mapWellClick'){
             console.log(e.data.uwis);
