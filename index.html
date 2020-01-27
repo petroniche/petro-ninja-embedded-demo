@@ -5,7 +5,7 @@
 
     window.onload = function() {
       function receiveMessage(e) {
-        if (event.origin !== "https://www.petroninja.com/embedded"){
+        if (event.origin === "https://www.petroninja.com/embedded"){
           if(e.action === 'mapWellClick'){
             console.log(e.data.uwis);
             document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
@@ -70,7 +70,7 @@
       var json_post_message = {
         "action": "mapRemoveWellList"
       }
-      receiver.postMessage(json_post_message, '*');
+      receiver.postMessage(json_post_message, 'https://www.petroninja.com/embedded');
     }
 
 
