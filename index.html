@@ -5,10 +5,14 @@
 
     window.onload = function() {
       function receiveMessage(e) {
-        console.log(e.data.uwis);
-          document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
-          document.getElementById("well_license_no").innerHTML = e.data.uwis[0].license_number
-          document.getElementById("well_licensee").innerHTML = e.data.uwis[0].licensee
+        if (event.origin !== "https://www.petroninja.com/embedded"){
+          if(e.action === 'mapWellClick'){
+            console.log(e.data.uwis);
+            document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
+            document.getElementById("well_license_no").innerHTML = e.data.uwis[0].license_number
+            document.getElementById("well_licensee").innerHTML = e.data.uwis[0].licensee
+          }
+        }
       }
       window.addEventListener('message', receiveMessage);
     }
