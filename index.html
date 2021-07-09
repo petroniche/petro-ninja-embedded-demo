@@ -13,6 +13,10 @@
             document.getElementById("well_license_no").innerHTML = e.data.uwis[0].license_number
             document.getElementById("well_licensee").innerHTML = e.data.uwis[0].licensee
           }
+          else if (e.data.action === 'MULTI_WELLS_SELECT'){
+            console.log(e.data.wells);
+            document.getElementById("drag_select_uwis").innerHTML = JSON.stringify(e.data.wells)
+          }
         }
       }
       window.addEventListener('message', receiveMessage);
@@ -44,7 +48,7 @@
 
       console.log(json_post_message);
 
-      receiver.postMessage(json_post_message, 'https://www.petroninja.com/embedded');
+      receiver.postMessage(json_post_message, '*');
     }
 
     function searchUwi(){
@@ -145,6 +149,12 @@
       <p>
       <b> 4) Set Map at Lat Lng 52.264812, -114.566834 <b><br/>
       <button onclick="centerMap(52.264812, -114.566834)">Center Map</button>
+
+      <p>
+      <b> 5) Multi Wells Select - Drag Select Wells to Fetch<b><br/>
+
+      <div id= 'drag_select_uwis'></div>
+
     </p>
     </div>
 
