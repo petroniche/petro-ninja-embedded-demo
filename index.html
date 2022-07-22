@@ -6,7 +6,7 @@
     window.onload = function() {
       function receiveMessage(e) {
         console.log(e);
-        if (e.origin === "https://embedded.petroninja.com"){
+        if (e.origin === "https://embedded.petroniche.com"){
           if(e.data.action === 'mapWellClick'){
             console.log(e.data.uwis);
             document.getElementById("well_uwi").innerHTML = e.data.uwis[0].well_id
@@ -67,7 +67,7 @@
 
       console.log(json_post_message);
 
-      receiver.postMessage(json_post_message, 'https://embedded.petroninja.com/embedded');
+      receiver.postMessage(json_post_message, 'https://embedded.petroniche.com/embedded');
     }
 
     function removeWellList(){
@@ -75,7 +75,7 @@
       var json_post_message = {
         "action": "mapRemoveWellList"
       }
-      receiver.postMessage(json_post_message, 'https://embedded.petroninja.com/embedded');
+      receiver.postMessage(json_post_message, 'https://embedded.petroniche.com/embedded');
     }
 
 
@@ -90,7 +90,7 @@
 
       console.log(json_post_message);
 
-      receiver.postMessage(json_post_message, 'https://embedded.petroninja.com/embedded');
+      receiver.postMessage(json_post_message, 'https://embedded.petroniche.com/embedded');
     }
   </script>
 
